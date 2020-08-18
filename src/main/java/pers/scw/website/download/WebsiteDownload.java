@@ -12,9 +12,11 @@ import org.jsoup.select.Elements;
 
 import scw.core.Constants;
 import scw.core.utils.StringUtils;
+import scw.http.HttpHeaders;
 import scw.http.HttpResponseEntity;
 import scw.http.HttpUtils;
 import scw.http.client.exception.HttpClientException;
+import scw.io.FileUtils;
 import scw.logger.Logger;
 import scw.logger.LoggerUtils;
 import scw.net.MimeType;
@@ -43,6 +45,8 @@ public class WebsiteDownload {
 	private int retryCount = 3;
 
 	private String charsetName = Constants.UTF_8.name();
+	
+	private HttpHeaders httpHeaders = new HttpHeaders();
 
 	/**
 	 * 下载网站
@@ -55,6 +59,10 @@ public class WebsiteDownload {
 	public WebsiteDownload(String rootDirectory, String website) {
 		this.rootDirectory = rootDirectory;
 		this.website = website;
+	}
+
+	public HttpHeaders getHttpHeaders() {
+		return httpHeaders;
 	}
 
 	public boolean isDownloadHyperlinks() {
@@ -168,9 +176,6 @@ public class WebsiteDownload {
 
 	/**
 	 * 下载文件
-	 * 
-	 * @param tagName
-	 *            标签名称
 	 * @param url
 	 *            下载地址
 	 * @param ext
@@ -213,7 +218,7 @@ public class WebsiteDownload {
 		HttpResponseEntity<File> httpResponseEntity = null;
 		for (int i = 0; i <= getRetryCount(); i++) {
 			try {
-				httpResponseEntity = HttpUtils.getHttpClient().download(file, url, null, null);
+				httpResponseEntity = HttpUtils.getHttpClient().download(file, url, getHttpHeaders(), null);
 				if (httpResponseEntity.getBody() != null) {
 					break;
 				}
@@ -252,6 +257,7 @@ public class WebsiteDownload {
 			Document document = Jsoup.parse(file, charsetName);
 			document.setBaseUri(website);
 			parse(document);
+			FileUtils.write(file, document.html(), charsetName);
 		}
 		return path;
 	}

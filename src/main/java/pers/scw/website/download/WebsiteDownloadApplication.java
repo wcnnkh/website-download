@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import scw.application.MainArgs;
 import scw.core.utils.StringUtils;
+import scw.http.HttpHeaders;
 import scw.http.HttpUtils;
 import scw.logger.Logger;
 import scw.logger.LoggerUtils;
@@ -26,7 +27,14 @@ public class WebsiteDownloadApplication {
 		Scanner scanner = new Scanner(System.in);
 		logger.info(BEGIN);
 		while(true){
-			String input = scanner.next();
+			String input;
+			try {
+				input = scanner.next();
+			} catch (Exception e) {
+				logger.info("程序非正常退出(可能使用了ctrl+z)");
+				break;
+			}
+			
 			if(input.equals(QUIT)){
 				logger.info("你输入了{}，程序已退出", QUIT);
 				break;
@@ -38,6 +46,8 @@ public class WebsiteDownloadApplication {
 			}
 			
 			WebsiteDownload websiteDownload = new WebsiteDownload(directory + "/" + HttpUtils.encode(input), input);
+			//使用百度爬虫的UA可以绕过一些网站的验证(如:微博的访客系统)
+			websiteDownload.getHttpHeaders().set(HttpHeaders.USER_AGENT, "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)");
 			try {
 				websiteDownload.download();
 			} catch (Exception e) {
