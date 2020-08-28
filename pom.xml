@@ -2,8 +2,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>shuchaowen</groupId>
-		<artifactId>shuchaowen</artifactId>
+		<groupId>scw</groupId>
+		<artifactId>scw</artifactId>
 		<version>1.0.0</version>
 	</parent>
 	<artifactId>website-download</artifactId>
@@ -16,8 +16,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>shuchaowen</groupId>
-			<artifactId>shuchaowen-core</artifactId>
+			<groupId>scw</groupId>
+			<artifactId>scw-core</artifactId>
 			<exclusions>
 				<exclusion>
 					<groupId>com.alibaba</groupId>
