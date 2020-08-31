@@ -17,6 +17,7 @@ import scw.http.HttpResponseEntity;
 import scw.http.HttpUtils;
 import scw.http.client.exception.HttpClientException;
 import scw.io.FileUtils;
+import scw.io.support.TemporaryFile;
 import scw.logger.Logger;
 import scw.logger.LoggerUtils;
 import scw.net.MimeType;
@@ -201,6 +202,10 @@ public class WebsiteDownload {
 		if (StringUtils.isEmpty(path)) {
 			path = "index";
 		}
+		
+		if(path.endsWith("/")){
+			path += "index";
+		}
 
 		String extToUse = StringUtils.getFilenameExtension(path);
 		if (StringUtils.isNotEmpty(ext) && StringUtils.isEmpty(extToUse)) {
@@ -215,11 +220,12 @@ public class WebsiteDownload {
 		}
 
 		logger.info("开始下载:{}", url);
-		HttpResponseEntity<File> httpResponseEntity = null;
+		HttpResponseEntity<TemporaryFile> httpResponseEntity = null;
 		for (int i = 0; i <= getRetryCount(); i++) {
 			try {
-				httpResponseEntity = HttpUtils.getHttpClient().download(file, url, getHttpHeaders(), null);
+				httpResponseEntity = HttpUtils.getHttpClient().download(url, getHttpHeaders(), null, true);
 				if (httpResponseEntity.getBody() != null) {
+					FileUtils.copyFile(httpResponseEntity.getBody(), file, FileUtils.ONE_MB);
 					break;
 				}
 				logger.error("下载[{}]失败准备第{}次重试", url, (i + 1));
