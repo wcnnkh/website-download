@@ -226,6 +226,7 @@ public class WebsiteDownload {
 				httpResponseEntity = HttpUtils.getHttpClient().download(url, getHttpHeaders(), null, true);
 				if (httpResponseEntity.getBody() != null) {
 					FileUtils.copyFile(httpResponseEntity.getBody(), file, FileUtils.ONE_MB);
+					httpResponseEntity.getBody().delete();
 					break;
 				}
 				logger.error("下载[{}]失败准备第{}次重试", url, (i + 1));
