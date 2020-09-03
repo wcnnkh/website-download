@@ -17,7 +17,6 @@ import scw.http.HttpResponseEntity;
 import scw.http.HttpUtils;
 import scw.http.client.exception.HttpClientException;
 import scw.io.FileUtils;
-import scw.io.support.TemporaryFile;
 import scw.logger.Logger;
 import scw.logger.LoggerUtils;
 import scw.net.MimeType;
@@ -220,7 +219,7 @@ public class WebsiteDownload {
 		}
 
 		logger.info("开始下载:{}", url);
-		HttpResponseEntity<TemporaryFile> httpResponseEntity = null;
+		HttpResponseEntity<File> httpResponseEntity = null;
 		for (int i = 0; i <= getRetryCount(); i++) {
 			try {
 				httpResponseEntity = HttpUtils.getHttpClient().download(url, getHttpHeaders(), null, true);
