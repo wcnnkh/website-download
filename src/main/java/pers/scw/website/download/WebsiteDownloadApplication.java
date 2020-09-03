@@ -5,9 +5,9 @@ import java.util.Scanner;
 import scw.application.MainArgs;
 import scw.core.utils.StringUtils;
 import scw.http.HttpHeaders;
-import scw.http.HttpUtils;
 import scw.logger.Logger;
 import scw.logger.LoggerUtils;
+import scw.net.uri.UriUtils;
 import scw.value.Value;
 import scw.value.property.SystemPropertyFactory;
 
@@ -45,7 +45,7 @@ public class WebsiteDownloadApplication {
 				continue;
 			}
 			
-			WebsiteDownload websiteDownload = new WebsiteDownload(directory + "/" + HttpUtils.encode(input), input);
+			WebsiteDownload websiteDownload = new WebsiteDownload(directory + "/" + UriUtils.encode(input), input);
 			//使用百度爬虫的UA可以绕过一些网站的验证(如:微博的访客系统)
 			websiteDownload.getHttpHeaders().set(HttpHeaders.USER_AGENT, "Mozilla/5.0 (compatible; Baiduspider-render/2.0; +http://www.baidu.com/search/spider.html)");
 			try {

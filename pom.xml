@@ -6,6 +6,7 @@
 		<artifactId>scw</artifactId>
 		<version>1.0.0</version>
 	</parent>
+	<groupId>pers.scw</groupId>
 	<artifactId>website-download</artifactId>
 	<version>0.0.1</version>
 
