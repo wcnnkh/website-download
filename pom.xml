@@ -19,16 +19,6 @@
 		<dependency>
 			<groupId>scw</groupId>
 			<artifactId>scw-core</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>com.alibaba</groupId>
-					<artifactId>fastjson</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>com.caucho</groupId>
-					<artifactId>hessian</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
