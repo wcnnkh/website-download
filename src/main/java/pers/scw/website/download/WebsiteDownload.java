@@ -13,6 +13,7 @@ import org.jsoup.select.Elements;
 import scw.core.Constants;
 import scw.core.utils.StringUtils;
 import scw.http.HttpHeaders;
+import scw.http.HttpMethod;
 import scw.http.HttpResponseEntity;
 import scw.http.HttpUtils;
 import scw.http.client.exception.HttpClientException;
@@ -45,7 +46,7 @@ public class WebsiteDownload {
 	private int retryCount = 3;
 
 	private String charsetName = Constants.UTF_8.name();
-	
+
 	private HttpHeaders httpHeaders = new HttpHeaders();
 
 	/**
@@ -145,7 +146,8 @@ public class WebsiteDownload {
 	 * @param ext
 	 *            默认的文件扩展名
 	 */
-	protected void downloadByTag(Element root, String tagName, String attributeName, String ext) {
+	protected void downloadByTag(Element root, String tagName,
+			String attributeName, String ext) {
 		Elements elements = root.getElementsByTag(tagName);
 		for (Element element : elements) {
 			if (element.hasAttr(attributeName)) {
@@ -176,6 +178,7 @@ public class WebsiteDownload {
 
 	/**
 	 * 下载文件
+	 * 
 	 * @param url
 	 *            下载地址
 	 * @param ext
@@ -185,7 +188,8 @@ public class WebsiteDownload {
 	 * @return
 	 * @throws IOException
 	 */
-	protected String download(String url, String ext, boolean force) throws IOException {
+	protected String download(String url, String ext, boolean force)
+			throws IOException {
 		URI uri;
 		try {
 			uri = new URI(url);
@@ -201,8 +205,8 @@ public class WebsiteDownload {
 		if (StringUtils.isEmpty(path)) {
 			path = "index";
 		}
-		
-		if(path.endsWith("/")){
+
+		if (path.endsWith("/")) {
 			path += "index";
 		}
 
@@ -222,9 +226,13 @@ public class WebsiteDownload {
 		HttpResponseEntity<File> httpResponseEntity = null;
 		for (int i = 0; i <= getRetryCount(); i++) {
 			try {
-				httpResponseEntity = HttpUtils.getHttpClient().download(url, getHttpHeaders(), null, true);
+				httpResponseEntity = HttpUtils.getHttpClient()
+						.createConnection(HttpMethod.GET, url)
+						.headers(getHttpHeaders()).setRedirectEnable(true)
+						.download();
 				if (httpResponseEntity.getBody() != null) {
-					FileUtils.copyFile(httpResponseEntity.getBody(), file, FileUtils.ONE_MB);
+					FileUtils.copyFile(httpResponseEntity.getBody(), file,
+							FileUtils.ONE_MB);
 					httpResponseEntity.getBody().delete();
 					break;
 				}
@@ -251,7 +259,8 @@ public class WebsiteDownload {
 				website = website.substring(0, index);
 			}
 
-			MimeType mimeType = httpResponseEntity.getHeaders().getContentType();
+			MimeType mimeType = httpResponseEntity.getHeaders()
+					.getContentType();
 			String charsetName = null;
 			if (mimeType != null) {
 				charsetName = mimeType.getCharsetName();
