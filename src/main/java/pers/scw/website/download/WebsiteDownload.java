@@ -236,9 +236,8 @@ public class WebsiteDownload {
 					httpResponseEntity.getBody().delete();
 					break;
 				}
-				logger.error("下载[{}]失败准备第{}次重试", url, (i + 1));
 			} catch (HttpClientException e) {
-				logger.error(e, "下载[{}]失败准备第{}次重试", url, (i + 1));
+				logger.error("下载[{}]失败准备第{}次重试, 失败信息[{}]", url, (i + 1), e.getMessage());
 			}
 		}
 

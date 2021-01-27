@@ -2,14 +2,14 @@ package pers.scw.website.download;
 
 import java.util.Scanner;
 
-import scw.application.MainArgs;
 import scw.core.utils.StringUtils;
+import scw.env.SystemEnvironment;
+import scw.env.support.MainArgs;
 import scw.http.HttpHeaders;
 import scw.logger.Logger;
 import scw.logger.LoggerUtils;
 import scw.net.uri.UriUtils;
 import scw.value.Value;
-import scw.value.property.SystemPropertyFactory;
 
 public class WebsiteDownloadApplication {
 	private static Logger logger = LoggerUtils.getLogger(WebsiteDownloadApplication.class);
@@ -18,10 +18,10 @@ public class WebsiteDownloadApplication {
 	
 	public static void main(String[] args) {
 		MainArgs mainArgs = new MainArgs(args);
-		Value d = mainArgs.getInstruction("-d");
+		Value d = mainArgs.getNextValue("-d");
 		String directory = d == null? null:d.getAsString();
 		if (StringUtils.isEmpty(directory)) {
-			directory = SystemPropertyFactory.getInstance().getUserDir();
+			directory = SystemEnvironment.getInstance().getUserDir();
 		}
 		
 		Scanner scanner = new Scanner(System.in);
