@@ -31,7 +31,7 @@ public class WebsiteDownloadApplication {
 			try {
 				input = scanner.next();
 			} catch (Exception e) {
-				logger.info("程序非正常退出(可能使用了ctrl+z)");
+				logger.info("程序非正常退出(可能使用了ctrl+c)");
 				break;
 			}
 			
