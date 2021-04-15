@@ -7,12 +7,12 @@ import scw.env.SystemEnvironment;
 import scw.env.support.MainArgs;
 import scw.http.HttpHeaders;
 import scw.logger.Logger;
-import scw.logger.LoggerUtils;
+import scw.logger.LoggerFactory;
 import scw.net.uri.UriUtils;
 import scw.value.Value;
 
 public class WebsiteDownloadApplication {
-	private static Logger logger = LoggerUtils.getLogger(WebsiteDownloadApplication.class);
+	private static Logger logger = LoggerFactory.getLogger(WebsiteDownloadApplication.class);
 	private static final String QUIT = "q";
 	private static final String BEGIN = "请输入要下载的网站, 输入'" + QUIT +"'即可退出";
 	

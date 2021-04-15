@@ -19,7 +19,7 @@ import scw.http.HttpUtils;
 import scw.http.client.exception.HttpClientException;
 import scw.io.FileUtils;
 import scw.logger.Logger;
-import scw.logger.LoggerUtils;
+import scw.logger.LoggerFactory;
 import scw.net.MimeType;
 
 /**
@@ -29,7 +29,7 @@ import scw.net.MimeType;
  *
  */
 public class WebsiteDownload {
-	private static Logger logger = LoggerUtils.getLogger(WebsiteDownload.class);
+	private static Logger logger = LoggerFactory.getLogger(WebsiteDownload.class);
 	private final String rootDirectory;
 	private final String website;
 
