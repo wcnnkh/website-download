@@ -3,8 +3,8 @@ package pers.scw.website.download;
 import java.util.Scanner;
 
 import scw.core.utils.StringUtils;
+import scw.env.MainArgs;
 import scw.env.SystemEnvironment;
-import scw.env.support.MainArgs;
 import scw.http.HttpHeaders;
 import scw.logger.Logger;
 import scw.logger.LoggerFactory;
