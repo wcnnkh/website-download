@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 import scw.core.utils.StringUtils;
 import scw.env.MainArgs;
-import scw.env.SystemEnvironment;
 import scw.http.HttpHeaders;
+import scw.io.FileUtils;
 import scw.logger.Logger;
 import scw.logger.LoggerFactory;
 import scw.net.uri.UriUtils;
@@ -21,7 +21,7 @@ public class WebsiteDownloadApplication {
 		Value d = mainArgs.getNextValue("-d");
 		String directory = d == null? null:d.getAsString();
 		if (StringUtils.isEmpty(directory)) {
-			directory = SystemEnvironment.getInstance().getUserDir();
+			directory = FileUtils.getUserDir();
 		}
 		
 		Scanner scanner = new Scanner(System.in);
