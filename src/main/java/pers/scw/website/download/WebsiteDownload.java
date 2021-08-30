@@ -10,17 +10,17 @@ import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
-import scw.core.Constants;
-import scw.core.utils.StringUtils;
-import scw.http.HttpHeaders;
-import scw.http.HttpMethod;
-import scw.http.HttpResponseEntity;
-import scw.http.HttpUtils;
-import scw.http.client.exception.HttpClientException;
-import scw.io.FileUtils;
-import scw.logger.Logger;
-import scw.logger.LoggerFactory;
-import scw.net.MimeType;
+import io.basc.framework.http.HttpHeaders;
+import io.basc.framework.http.HttpMethod;
+import io.basc.framework.http.HttpResponseEntity;
+import io.basc.framework.http.HttpUtils;
+import io.basc.framework.http.client.exception.HttpClientException;
+import io.basc.framework.io.FileUtils;
+import io.basc.framework.lang.Constants;
+import io.basc.framework.logger.Logger;
+import io.basc.framework.logger.LoggerFactory;
+import io.basc.framework.net.MimeType;
+import io.basc.framework.util.StringUtils;
 
 /**
  * 网页下载(注意：忽略了非同源地址)

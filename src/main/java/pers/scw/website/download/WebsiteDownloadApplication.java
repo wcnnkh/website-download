@@ -2,14 +2,14 @@ package pers.scw.website.download;
 
 import java.util.Scanner;
 
-import scw.core.utils.StringUtils;
-import scw.env.MainArgs;
-import scw.http.HttpHeaders;
-import scw.io.FileUtils;
-import scw.logger.Logger;
-import scw.logger.LoggerFactory;
-import scw.net.uri.UriUtils;
-import scw.value.Value;
+import io.basc.framework.env.MainArgs;
+import io.basc.framework.http.HttpHeaders;
+import io.basc.framework.io.FileUtils;
+import io.basc.framework.logger.Logger;
+import io.basc.framework.logger.LoggerFactory;
+import io.basc.framework.net.uri.UriUtils;
+import io.basc.framework.util.StringUtils;
+import io.basc.framework.value.Value;
 
 public class WebsiteDownloadApplication {
 	private static Logger logger = LoggerFactory.getLogger(WebsiteDownloadApplication.class);

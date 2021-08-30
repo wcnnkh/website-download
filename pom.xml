@@ -2,11 +2,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>scw</groupId>
-		<artifactId>scw</artifactId>
-		<version>2.0</version>
+		<groupId>io.basc.framework</groupId>
+		<artifactId>framework</artifactId>
+		<version>1.8.0</version>
 	</parent>
-	<groupId>pers.scw</groupId>
+	<groupId>io.github.wcnnkh</groupId>
 	<artifactId>website-download</artifactId>
 	<version>0.0.1</version>
 
@@ -17,8 +17,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>scw</groupId>
-			<artifactId>scw-core</artifactId>
+			<groupId>io.basc.framework</groupId>
+			<artifactId>core</artifactId>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.jsoup/jsoup -->
 		<dependency>
