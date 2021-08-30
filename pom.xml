@@ -49,7 +49,7 @@
 					<archive>
 						<manifest>
 							<!-- 主程序入口类 -->
-							<mainClass>pers.scw.website.download.WebsiteDownloadApplication</mainClass>
+							<mainClass>io.github.wcnnkh.website.download.WebsiteDownloadApplication</mainClass>
 						</manifest>
 					</archive>
 				</configuration>

@@ -1,4 +1,4 @@
-package pers.scw.website.download;
+package io.github.wcnnkh.website.download;
 
 import java.util.Scanner;
 
