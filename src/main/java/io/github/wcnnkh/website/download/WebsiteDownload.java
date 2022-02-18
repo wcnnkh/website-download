@@ -14,7 +14,7 @@ import io.basc.framework.http.HttpHeaders;
 import io.basc.framework.http.HttpMethod;
 import io.basc.framework.http.HttpResponseEntity;
 import io.basc.framework.http.HttpUtils;
-import io.basc.framework.http.client.exception.HttpClientException;
+import io.basc.framework.http.client.HttpClientException;
 import io.basc.framework.io.FileUtils;
 import io.basc.framework.lang.Constants;
 import io.basc.framework.logger.Logger;
@@ -52,10 +52,8 @@ public class WebsiteDownload {
 	/**
 	 * 下载网站
 	 * 
-	 * @param rootDirectory
-	 *            下载目录
-	 * @param website
-	 *            网站地址
+	 * @param rootDirectory 下载目录
+	 * @param website       网站地址
 	 */
 	public WebsiteDownload(String rootDirectory, String website) {
 		this.rootDirectory = rootDirectory;
@@ -141,13 +139,10 @@ public class WebsiteDownload {
 	 * 
 	 * @param root
 	 * @param tagName
-	 * @param attributeName
-	 *            下载地址的属性名称
-	 * @param ext
-	 *            默认的文件扩展名
+	 * @param attributeName 下载地址的属性名称
+	 * @param ext           默认的文件扩展名
 	 */
-	protected void downloadByTag(Element root, String tagName,
-			String attributeName, String ext) {
+	protected void downloadByTag(Element root, String tagName, String attributeName, String ext) {
 		Elements elements = root.getElementsByTag(tagName);
 		for (Element element : elements) {
 			if (element.hasAttr(attributeName)) {
@@ -179,17 +174,13 @@ public class WebsiteDownload {
 	/**
 	 * 下载文件
 	 * 
-	 * @param url
-	 *            下载地址
-	 * @param ext
-	 *            文件默认扩展名
-	 * @param force
-	 *            是否强制重新下载
+	 * @param url   下载地址
+	 * @param ext   文件默认扩展名
+	 * @param force 是否强制重新下载
 	 * @return
 	 * @throws IOException
 	 */
-	protected String download(String url, String ext, boolean force)
-			throws IOException {
+	protected String download(String url, String ext, boolean force) throws IOException {
 		URI uri;
 		try {
 			uri = new URI(url);
@@ -226,13 +217,10 @@ public class WebsiteDownload {
 		HttpResponseEntity<File> httpResponseEntity = null;
 		for (int i = 0; i <= getRetryCount(); i++) {
 			try {
-				httpResponseEntity = HttpUtils.getHttpClient()
-						.createConnection(HttpMethod.GET, url)
-						.headers(getHttpHeaders()).setRedirectEnable(true)
-						.download();
+				httpResponseEntity = HttpUtils.getHttpClient().createConnection(HttpMethod.GET, url)
+						.headers(getHttpHeaders()).setMaxRedirectDeep(10).download();
 				if (httpResponseEntity.getBody() != null) {
-					FileUtils.copyFile(httpResponseEntity.getBody(), file,
-							FileUtils.ONE_MB);
+					FileUtils.copyFile(httpResponseEntity.getBody(), file, FileUtils.ONE_MB);
 					httpResponseEntity.getBody().delete();
 					break;
 				}
@@ -258,8 +246,7 @@ public class WebsiteDownload {
 				website = website.substring(0, index);
 			}
 
-			MimeType mimeType = httpResponseEntity.getHeaders()
-					.getContentType();
+			MimeType mimeType = httpResponseEntity.getHeaders().getContentType();
 			String charsetName = null;
 			if (mimeType != null) {
 				charsetName = mimeType.getCharsetName();
