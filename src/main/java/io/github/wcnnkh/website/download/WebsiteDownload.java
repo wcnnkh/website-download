@@ -217,7 +217,7 @@ public class WebsiteDownload {
 		HttpResponseEntity<File> httpResponseEntity = null;
 		for (int i = 0; i <= getRetryCount(); i++) {
 			try {
-				httpResponseEntity = HttpUtils.getHttpClient().createConnection(HttpMethod.GET, url)
+				httpResponseEntity = HttpUtils.getClient().createConnection(HttpMethod.GET, url)
 						.headers(getHttpHeaders()).setMaxRedirectDeep(10).download();
 				if (httpResponseEntity.getBody() != null) {
 					FileUtils.copyFile(httpResponseEntity.getBody(), file, FileUtils.ONE_MB);
